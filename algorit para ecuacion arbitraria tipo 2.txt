@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+void compute_solution(short *A, short *B, float *C, int n, float *result) {
+    *result = 0.0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            *result += (A[i] * (B[j] + C[i]));
+        }
+    }
+}
+
+int main() {
+    int n = 3; // Por ejemplo, tamaño 3, pero puedes cambiarlo
+    short A[3] = {1, 2, 3}; // Ejemplo de valores
+    short B[3] = {4, 5, 6}; // Ejemplo de valores
+    float C[3] = {0.5, 1.5, 2.5}; // Ejemplo de valores
+    float result;
+
+    compute_solution(A, B, C, n, &result);
+    printf("Resultado: %f\n", result);
+
+    return 0;
+}
