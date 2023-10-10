@@ -1,0 +1,10 @@
+def py_arctan_fast(x, n_terms):
+    result = x  # El primer término
+    term = x
+    for n in range(1, n_terms):
+        term *= (x * x * (2*(n-1) + 1)) / (2*n + 1)
+        if n % 2 == 1:
+            result -= term
+        else:
+            result += term
+    return result
