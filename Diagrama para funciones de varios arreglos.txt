@@ -1,0 +1,24 @@
+// funcion mediante phyton
+import random
+
+# Generar datos de prueba
+A = [random.randint(-32768, 32767) for _ in range(16)]
+B = [random.uniform(0, 10) for _ in range(16)]
+C = [random.randint(-32768, 32767) for _ in range(16)]
+resultado_python = [0.0]
+
+calcularS(A, B, C, resultado_python)
+
+print("Resultado (Python):", resultado_python[0])
+
+//funcion mediante C a traves de 'ctypes'
+
+# Convertimos las listas en arreglos ctypes
+A_ctypes = (ctypes.c_int * 16)(*A)
+B_ctypes = (ctypes.c_double * 16)(*B)
+C_ctypes = (ctypes.c_int * 16)(*C)
+resultado_ctypes = ctypes.c_float(0)
+
+lib.calcularS(A_ctypes, B_ctypes, C_ctypes, 16, ctypes.byref(resultado_ctypes))
+
+print("Resultado (C a través de ctypes):", resultado_ctypes.value)
