@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+// Función para double
+double arctan_fast_double(double x, int n_terms) {
+    double result = x;  // El primer término
+    double term = x;
+    for (int n = 1; n < n_terms; n++) {
+        term *= (x * x * (2*(n-1) + 1)) / (2*n + 1);
+        if (n % 2 == 1) {
+            result -= term;
+        } else {
+            result += term;
+        }
+    }
+    return result;
+}
+
+// Función para long double
+long double arctan_fast_long_double(long double x, int n_terms) {
+    long double result = x;  // El primer término
+    long double term = x;
+    for (int n = 1; n < n_terms; n++) {
+        term *= (x * x * (2*(n-1) + 1)) / (2*n + 1);
+        if (n % 2 == 1) {
+            result -= term;
+        } else {
+            result += term;
+        }
+    }
+    return result;
+}
+
+// Función principal para probar las funciones
+int main() {
+    double x_double = 0.5;
+    long double x_long_double = 0.5;
+    int n_terms = 10;
+
+    printf("arctan_fast_double(%lf, %d) = %lf\n", x_double, n_terms, arctan_fast_double(x_double, n_terms));
+    printf("arctan_fast_long_double(%Lf, %d) = %Lf\n", x_long_double, n_terms, arctan_fast_long_double(x_long_double, n_terms));
+
+    return 0;
+}
