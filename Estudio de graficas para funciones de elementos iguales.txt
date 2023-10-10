@@ -1,0 +1,37 @@
+import time
+import matplotlib.pyplot as plt
+
+def tiempo_ejecucion(func, A, B, C, resultado):
+    inicio = time.time()
+    func(A, B, C, resultado)
+    fin = time.time()
+    return fin - inicio
+
+# Generar datos de prueba
+A = [random.randint(-32768, 32767) for _ in range(1024)]
+B = [random.uniform(0, 10) for _ in range(1024)]
+C = [random.randint(-32768, 32767) for _ in range(1024)]
+
+# Convertimos las listas en arreglos ctypes
+A_ctypes = (ctypes.c_int * 1024)(*A)
+B_ctypes = (ctypes.c_double * 1024)(*B)
+C_ctypes = (ctypes.c_int * 1024)(*C)
+
+tiempos_python = []
+tiempos_ctypes = []
+
+for _ in range(25):
+    resultado_python = [0.0]
+    resultado_ctypes = ctypes.c_float(0)
+    
+    tiempos_python.append(tiempo_ejecucion(calcularS, A, B, C, resultado_python))
+    tiempos_ctypes.append(tiempo_ejecucion(lib.calcularS, A_ctypes, B_ctypes, C_ctypes, ctypes.byref(resultado_ctypes)))
+
+# Gráfico
+plt.plot(tiempos_python, label='Python')
+plt.plot(tiempos_ctypes, label='C a través de ctypes', linestyle='--')
+plt.legend()
+plt.xlabel('Iteración')
+plt.ylabel('Tiempo (s)')
+plt.title('Análisis Temporal (25 iteraciones, tamaño 1024)')
+plt.show()
