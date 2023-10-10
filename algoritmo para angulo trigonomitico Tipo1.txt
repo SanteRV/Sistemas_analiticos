@@ -1,0 +1,10 @@
+def py_arctan_slow(x, n_terms):
+    result = 0
+    for i in range(n_terms):
+        term = (x ** (2*i + 1)) / (2*i + 1)
+        # Si el término es impar, restamos. Si es par, sumamos.
+        if i % 2 == 1:
+            result -= term
+        else:
+            result += term
+    return result
