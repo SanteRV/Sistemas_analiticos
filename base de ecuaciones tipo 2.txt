@@ -1,0 +1,14 @@
+def compute_solution(A, B, C):
+    result = 0.0
+    n = len(A)
+    for i in range(n):
+        for j in range(n):
+            result += A[i] * (B[j] + C[i])
+    print("Resultado:", result)
+
+# Ejemplo de uso:
+A = [1, 2, 3]  # Valores de ejemplo
+B = [4, 5, 6]  # Valores de ejemplo
+C = [0.5, 1.5, 2.5]  # Valores de ejemplo
+
+compute_solution(A, B, C)
