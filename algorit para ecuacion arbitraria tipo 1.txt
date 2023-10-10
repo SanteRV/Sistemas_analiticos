@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+void calcularS(int A[], double B[], int C[], int n, float *resultado) {
+    float S = 0.0f; // inicializamos la suma
+
+    for (int i = 0; i < n; i++) {
+        float prod_temp = 1.0f; // inicializamos el producto temporal para cada i
+
+        for (int j = 0; j < n; j++) {
+            prod_temp *= (A[i] * B[j] + C[i]);
+        }
+
+        S += prod_temp; // sumamos el producto temporal a S
+    }
+
+    *resultado = S; // almacenamos el resultado en el puntero
+}
+
+// El siguiente es un pequeño programa para probar la función
+int main() {
+    int A[] = {1, 2};
+    double B[] = {2.5, 3.5};
+    int C[] = {3, 4};
+    float resultado = 0.0f;
+
+    calcularS(A, B, C, 2, &resultado);
+
+    printf("El resultado es: %f\n", resultado);
+
+    return 0;
+}
