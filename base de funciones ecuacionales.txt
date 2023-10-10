@@ -1,0 +1,24 @@
+def calcularS(A, B, C, resultado):
+    n = len(A)
+    S = 0.0
+
+    for i in range(n):
+        prod_temp = 1.0
+
+        for j in range(n):
+            prod_temp *= (A[i] * B[j] + C[i])
+
+        S += prod_temp
+
+    resultado[0] = S
+
+# El siguiente es un pequeño programa para probar la función
+if __name__ == "__main__":
+    A = [1, 2]
+    B = [2.5, 3.5]
+    C = [3, 4]
+    resultado = [0.0]  # iniciamos una lista con un solo elemento
+
+    calcularS(A, B, C, resultado)
+
+    print("El resultado es:", resultado[0])
