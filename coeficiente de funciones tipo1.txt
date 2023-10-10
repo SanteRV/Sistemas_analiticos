@@ -1,0 +1,28 @@
+import ctypes
+
+# Cargamos la biblioteca
+lib = ctypes.CDLL('./libreria_C.so')
+
+# Definimos los tipos de los argumentos y el tipo de retorno de la función
+lib.calcularS.argtypes = [ctypes.POINTER(ctypes.c_int), 
+                          ctypes.POINTER(ctypes.c_double), 
+                          ctypes.POINTER(ctypes.c_int), 
+                          ctypes.c_int,
+                          ctypes.POINTER(ctypes.c_float)]
+lib.calcularS.restype = None
+
+# Creamos los datos de prueba
+A = (ctypes.c_int * 2)(1, 2)
+B = (ctypes.c_double * 2)(2.5, 3.5)
+C = (ctypes.c_int * 2)(3, 4)
+n = 2
+resultado = ctypes.c_float(0)
+
+# Llamamos a la función
+lib.calcularS(A, B, C, n, ctypes.byref(resultado))
+
+print("El resultado es:", resultado.value)
+
+
+//bash
+//gcc -shared -o libreria_C.so -fPIC libreria_C.c
