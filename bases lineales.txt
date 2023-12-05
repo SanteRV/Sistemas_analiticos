@@ -1,0 +1,33 @@
+Para abordar tus preguntas, primero, es importante tener en cuenta que, como no tengo acceso a ejecutar programas Python directamente ni acceso a un entorno de desarrollo externo, no podré generar los tiempos de ejecución de los scripts que has proporcionado. Sin embargo, puedo guiarte sobre cómo ejecutar estos scripts y calcular los tiempos de ejecución, así como proporcionar una explicación sobre cada enfoque y cómo calcular los valores de "speedup".
+
+### a) Tiempo de Ejecución para `scraper_async.py`
+
+Para generar el tiempo de ejecución de `scraper_async.py`, debes ejecutar este script en tu entorno de desarrollo. Este script utiliza `asyncio` y `aiohttp` para realizar solicitudes HTTP de manera asíncrona. En lugar de esperar a que cada solicitud se complete antes de iniciar la siguiente (como en el enfoque sincrónico), este enfoque permite que el programa maneje otras tareas mientras espera la respuesta de las solicitudes, lo que puede mejorar significativamente la eficiencia para operaciones de E/S.
+
+### b) Tiempo de Ejecución para `scraper_multihilo.py`
+
+Para determinar el tiempo de ejecución óptimo y el número óptimo de hilos en `scraper_multihilo.py`, necesitarás ejecutar el script varias veces variando el número de hilos (`max_workers` en `ThreadPoolExecutor`). El valor óptimo de hilos dependerá de tu entorno específico y la naturaleza de las tareas (en este caso, solicitudes HTTP). Generalmente, para operaciones de E/S como las solicitudes web, un número mayor de hilos puede ser beneficioso.
+
+### c) Cálculo del Speedup para a) y b)
+
+El "speedup" se calcula comparando los tiempos de ejecución de las versiones asíncronas y multihilo con la versión sincrónica. Usa la fórmula:
+
+\[ \text{Speedup} = \frac{\text{Tiempo de ejecución sincrónico}}{\text{Tiempo de ejecución paralelo o asíncrono}} \]
+
+### d) Tiempo de Ejecución para `scraper_multiproceso.py`
+
+Para `scraper_multiproceso.py`, debes ejecutar el script variando el número de procesos. El valor óptimo de procesos, al igual que con los hilos, dependerá de tu sistema y la naturaleza de la tarea. Dado que las solicitudes web son principalmente limitadas por E/S y no por CPU, es posible que no veas una gran mejora con un mayor número de procesos.
+
+### e) Cálculo del Speedup para d)
+
+El cálculo del "speedup" para la versión de multiprocesos sigue la misma fórmula que en c). Compara el tiempo de ejecución de la versión de multiprocesos con la versión sincrónica.
+
+### f) Mejor Desempeño
+
+Para determinar qué versión tiene el mejor desempeño, compara los tiempos de ejecución de todas las versiones. En general, las operaciones asíncronas y multihilo suelen ser más eficientes para tareas limitadas por E/S, como las solicitudes web.
+
+### g) Evaluación del Rendimiento en Uso de Memoria
+
+Para evaluar el uso de memoria, puedes usar el módulo `mprof` de Python para monitorear y registrar el uso de memoria de cada script mientras se ejecutan. Luego, puedes usar `mprof plot` para generar gráficas del uso de memoria a lo largo del tiempo. La versión más eficiente en términos de uso de memoria será aquella que, para un tiempo de ejecución comparable, utilice menos memoria durante su ejecución.
+
+Para llevar a cabo estas evaluaciones, debes tener un conocimiento básico de cómo ejecutar scripts Python y cómo trabajar con herramientas de perfilado y monitoreo de rendimiento.
