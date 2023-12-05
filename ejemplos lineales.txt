@@ -1,0 +1,21 @@
+a) Mostrar el Tiempo de Ejecución del Programa Síncrono
+Para obtener el tiempo de ejecución del programa síncrono, debes ejecutar el archivo mult_vector_sincronico.py en tu entorno de desarrollo y observar la salida en la consola. Como no puedo ejecutar archivos en tu entorno, no podré proporcionarte una captura de pantalla directamente. Te recomiendo que ejecutes el programa y tomes una captura de pantalla del resultado que se muestra en la consola.
+
+b) Valor Óptimo de Procesos para el Pool
+El valor óptimo de procesos en un Pool depende de varios factores, principalmente del número de núcleos de CPU disponibles y de cómo el programa maneja la carga de trabajo entre los procesos.
+
+El archivo mult_vector_multiprocesos.py usa cpu_count() para determinar el número de procesos, lo que suele ser un buen punto de partida. Sin embargo, para encontrar el número óptimo, deberías probar con diferentes cantidades de procesos y medir el tiempo de ejecución para cada configuración. Es posible que el número óptimo sea igual al número de núcleos de CPU, pero esto puede variar según las características específicas del sistema y de la tarea.
+
+c) Cálculo del Speedup
+El "speedup" se calcula comparando el tiempo de ejecución del programa secuencial con el del programa paralelo. La fórmula es:
+
+Speedup=(Tiempo de ejecucion secuencial/Tiempo de ejecucion paralelo)
+
+ 
+
+Necesitarás ejecutar ambos programas y registrar sus tiempos de ejecución para calcular el speedup.
+
+d) Implementación con Hilos
+En teoría, podrías implementar una versión del programa que use hilos en lugar de procesos. Sin embargo, en Python, debido al Global Interpreter Lock (GIL), los hilos no siempre son efectivos para tareas intensivas en CPU. El GIL permite que solo un hilo ejecute código Python en un momento dado, lo cual puede limitar el rendimiento en tareas de cómputo intensivo. En cambio, para operaciones de I/O o tareas que no están limitadas por el GIL, los hilos pueden ser útiles.
+
+En resumen, para tareas computacionalmente intensivas como la multiplicación de matrices, el uso de procesos (como en mult_vector_multiprocesos.py) suele ser más efectivo que el uso de hilos en Python.
